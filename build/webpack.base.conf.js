@@ -52,7 +52,14 @@ module.exports = {
             },
           },
           'postcss-loader', // 使用 postcss 为 css 加上浏览器前缀
-          'sass-loader', // 编译scss
+          {
+            loader: 'sass-loader',
+            options: {
+              implementation: require('sass'),
+              // 如果你需要 source maps for scss (通常推荐在开发模式下开启)
+              // sourceMap: isDev, // 或者直接写 true/false
+            },
+          },
         ],
       },
       {
