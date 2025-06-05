@@ -314,7 +314,7 @@ export function genAgeAverage(data) {
         areaStyle: {
           // 区域填充样式
           normal: {
-            // 线性渐变，前4个参数分别是x0,y0,x2,y2(范围0~1);相当于图形包围盒中的百分比。如果最后一个参数是‘true’，则该四个值是绝对像素位置。
+            // 线性渐变，前4个参数分别是x0,y0,x2,y2(范围0~1);相当于图形包围盒中的百分比。如果最后一个参数是'true'，则该四个值是绝对像素位置。
             color: new echarts.graphic.LinearGradient(
               0,
               0,
@@ -600,15 +600,14 @@ export function genUserConverLine(data, legends) {
 }
 
 export function genEquipment(data) {
-  const yCategory = [];
   const series = [];
   const sum = data.reduce((prev, cur) => cur.value + prev, 0);
   data.forEach((item, i) => {
     series.push({
       name: '设置分布',
       type: 'pie',
-      clockWise: false, // 顺时加载
-      hoverAnimation: false, // 鼠标移入变大
+      clockWise: false,
+      hoverAnimation: false,
       radius: [`${75 - i * 15}%`, `${66 - i * 15}%`],
       center: ['35%', '55%'],
       label: {
@@ -647,8 +646,8 @@ export function genEquipment(data) {
       type: 'pie',
       silent: true,
       z: 1,
-      clockWise: false, // 顺时加载
-      hoverAnimation: false, // 鼠标移入变大
+      clockWise: false,
+      hoverAnimation: false,
       radius: [`${75 - i * 15}%`, `${66 - i * 15}%`],
       center: ['35%', '55%'],
       label: {
@@ -689,10 +688,9 @@ export function genEquipment(data) {
         },
       ],
     });
-    yCategory.push(`${((item.value / sum) * 100).toFixed(2)}%`);
   });
   return {
-    color: ['#FF8700', '#ffc300', '#00e473', '#009DFF'],
+    color: ['#FF8700', '#ffc300', '#00e473', '#009DFF', '#8874a5'],
     tooltip: {
       formatter: params => {
         return `
@@ -724,8 +722,7 @@ export function genEquipment(data) {
       itemHeight: 12,
       itemGap: 10,
       formatter: name => {
-        const item = data.find(k => k.name === name);
-        return `{title| ${name}}\n{value| ${item.value} 人}`;
+        return `{title| ${name}}`;
       },
       textStyle: {
         rich: {
@@ -733,13 +730,6 @@ export function genEquipment(data) {
             fontSize: 10,
             lineHeight: 10,
             color: '#ccc',
-            // color: "rgba(0,0,0,.45)"
-          },
-          value: {
-            fontSize: 14,
-            lineHeight: 18,
-            color: '#fff',
-            // color: "rgba(0,0,0,.85)"
           },
         },
       },
@@ -757,13 +747,14 @@ export function genEquipment(data) {
         axisLabel: {
           interval: 0,
           inside: true,
+          padding: [0, 0, -15, 0], // 上右下左的内边距
           textStyle: {
             color: '#eee',
-            fontSize: 10,
+            fontSize: 13,
           },
           show: true,
         },
-        data: yCategory,
+        data: data.map(item => `${item.value}/${sum}(${((item.value / sum) * 100).toFixed(2)}%)`),
       },
     ],
     xAxis: [

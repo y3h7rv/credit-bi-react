@@ -1,47 +1,104 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import Card from '@/components/Card';
-import Funnel from '@/components/Charts/Funnel';
-import Line from '@/components/Charts/Line';
-import Labels from '@/components/Labels';
-import { genUserConver, genUserConverLine } from '@/utils/genChartData';
+import React from 'react';
+import { Card } from 'antd';
+import Bar from '@/components/Charts/Bar';
 
-const legends = {
-  regist: {
-    key: 'regist',
-    label: '注册用户',
-    type: 'circle',
-    backgroundColor: '#465192',
+const riskData = [
+  { name: '父子域资源记录不一致', value: 70921 },
+  { name: '悬空记录', value: 15030 },
+  { name: '僵尸记录', value: 10314 },
+  { name: '蹩脚授权', value: 77330 },
+  { name: '循环授权', value: 12657 },
+];
+
+const total = riskData.reduce((sum, item) => sum + item.value, 0);
+
+// 按value值降序排序
+const sortedData = [...riskData].sort((a, b) => b.value - a.value);
+
+const colors = ['#FF8700', '#ffc300', '#00e473', '#009DFF', '#8874a5'];
+
+const chartData = {
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'shadow',
+    },
+    formatter: params => {
+      const param = params[0];
+      return `
+        <div style="font-size:12px;line-height:18px">
+          ${param.name}<br/>
+          数量：${param.value}<br/>
+          占比：${((param.value / total) * 100).toFixed(2)}%
+        </div>
+      `;
+    },
   },
-  real: {
-    key: 'real',
-    label: '实名用户',
-    type: 'circle',
-    backgroundColor: '#64609b',
+  grid: {
+    top: '3%',
+    left: '3%',
+    right: '15%',
+    bottom: '3%',
+    containLabel: true,
   },
-  loan: {
-    key: 'loan',
-    label: '贷款用户',
-    type: 'circle',
-    backgroundColor: '#8874a5',
+  xAxis: {
+    type: 'value',
+    axisLine: {
+      show: false,
+    },
+    axisTick: {
+      show: false,
+    },
+    axisLabel: {
+      color: '#999',
+    },
+    splitLine: {
+      lineStyle: {
+        color: 'rgba(255,255,255,0.1)',
+      },
+    },
   },
+  yAxis: {
+    type: 'category',
+    axisLine: {
+      show: false,
+    },
+    axisTick: {
+      show: false,
+    },
+    axisLabel: {
+      color: '#fff',
+      margin: 20,
+    },
+  },
+  yCategory: sortedData.map(item => item.name),
+  series: [
+    {
+      type: 'bar',
+      name: '风险数量',
+      barWidth: 20, // 使用具体的像素值
+      data: sortedData.map((item, idx) => ({
+        value: item.value,
+        itemStyle: {
+          color: colors[idx],
+        },
+      })),
+      label: {
+        show: true,
+        position: 'right',
+        color: '#fff',
+        formatter: params => {
+          return `${params.value} (${((params.value / total) * 100).toFixed(2)}%)`;
+        },
+      },
+    },
+  ],
 };
 
-@connect(({ loan }) => ({
-  loan,
-}))
-export default class index extends PureComponent {
-  render() {
-    const { loan } = this.props;
-    const { userConver } = loan;
-    const userConverData = genUserConver(userConver, legends);
-    const userConverLineData = genUserConverLine(userConver, legends);
-
-    return (
-      <Card title="客户统计" legends={<Labels data={Object.values(legends)} />}>
-        <Funnel data={userConverData} style={{ height: 200 }} />
-        <Line data={userConverLineData} style={{ height: 220 }} />
-      </Card>
-    );
-  }
+export default function index() {
+  return (
+    <Card title="域名授权依赖风险统计">
+      <Bar data={chartData} style={{ height: 320 }} />
+    </Card>
+  );
 }

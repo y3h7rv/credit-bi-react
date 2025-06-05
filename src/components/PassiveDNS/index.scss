@@ -1,0 +1,164 @@
+.container {
+  margin-bottom: 0;
+  background: rgba(40, 47, 56, 0.9);
+  border-radius: 4px;
+  padding: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+
+  :global {
+    .ant-input {
+      background: rgba(255, 255, 255, 0.9);
+      border-color: rgba(255, 255, 255, 0.2);
+      color: rgba(0, 0, 0, 0.85);
+      height: 32px;
+
+      &::placeholder {
+        color: rgba(0, 0, 0, 0.45);
+      }
+
+      &:hover,
+      &:focus {
+        border-color: #1890ff;
+      }
+    }
+
+    .ant-picker {
+      background: rgba(255, 255, 255, 0.9);
+      height: 32px;
+      border-color: rgba(255, 255, 255, 0.2);
+
+      input {
+        color: rgba(0, 0, 0, 0.85);
+        height: 30px;
+      }
+
+      .ant-picker-suffix {
+        color: rgba(0, 0, 0, 0.45);
+      }
+
+      &:hover {
+        border-color: #1890ff;
+      }
+    }
+
+    .ant-btn {
+      height: 32px;
+      padding: 4px 15px;
+
+      &.ant-btn-primary {
+        background: #1890ff;
+        border-color: #1890ff;
+
+        &:hover {
+          background: #40a9ff;
+          border-color: #40a9ff;
+        }
+      }
+    }
+  }
+}
+
+.resultsCard {
+  margin-top: 12px;
+  background: rgba(40, 47, 56, 0.9);
+  border-radius: 4px;
+
+  :global {
+    .ant-card-head {
+      min-height: 40px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+      .ant-card-head-title {
+        padding: 8px 0;
+        color: #fff;
+      }
+    }
+
+    .ant-table {
+      background: transparent;
+      color: #fff;
+
+      .ant-table-thead > tr > th {
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 8px;
+      }
+
+      .ant-table-tbody > tr > td {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 8px;
+      }
+
+      .ant-table-tbody > tr:hover > td {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .ant-table-placeholder {
+        background: transparent;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+        .ant-empty-description {
+          color: rgba(255, 255, 255, 0.5);
+        }
+      }
+    }
+
+    .ant-pagination {
+      padding: 12px;
+      color: #fff;
+
+      .ant-pagination-item {
+        background: transparent;
+        border-color: rgba(255, 255, 255, 0.2);
+        min-width: 28px;
+        height: 28px;
+        line-height: 26px;
+
+        a {
+          color: #fff;
+        }
+
+        &-active {
+          border-color: #1890ff;
+
+          a {
+            color: #1890ff;
+          }
+        }
+      }
+
+      .ant-pagination-prev,
+      .ant-pagination-next {
+        button {
+          background: transparent;
+          color: #fff;
+        }
+      }
+
+      .ant-select {
+        color: #fff;
+        .ant-select-selector {
+          background: transparent;
+          border-color: rgba(255, 255, 255, 0.2);
+          height: 28px;
+
+          .ant-select-selection-item {
+            line-height: 26px;
+          }
+        }
+
+        .ant-select-arrow {
+          color: rgba(255, 255, 255, 0.7);
+        }
+      }
+    }
+  }
+}

@@ -1,8 +1,14 @@
+import 'regenerator-runtime/runtime';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { ConfigProvider } from 'antd';
+import zhCN from 'antd/lib/locale/zh_CN';
+import moment from 'moment';
+import 'moment/locale/zh-cn';
+import 'antd/dist/antd.css';
 import { socket } from './utils/socket';
 import { SAVE_LOAN, SAVE_MAP } from './store/types';
 import Router from './router';
@@ -43,13 +49,17 @@ socket.init({
 
 socket.initWs();
 
+moment.locale('zh-cn');
+
 function render(Component) {
   ReactDOM.render(
     <AppContainer>
       <Provider store={store}>
-        <BrowserRouter>
-          <Component />
-        </BrowserRouter>
+        <ConfigProvider locale={zhCN}>
+          <BrowserRouter>
+            <Component />
+          </BrowserRouter>
+        </ConfigProvider>
       </Provider>
     </AppContainer>,
     document.getElementById('root')

@@ -1,91 +1,74 @@
-let i = 0;
-const effectScatterSeries = effectScatter();
+import mockData from '../../mock/data_to_show.json';
 
-export function genOverviewMap(cmap, message) {
-  const sortData = cmap.sort((a, b) => b.value - a.value);
-  const max = (sortData[0] && sortData[0].value.toFixed(2)) || 100;
-  const min =
-    (sortData[sortData.length - 1] && sortData[sortData.length - 1].value.toFixed(0)) || 0;
-  effectScatterSeries[i] = {
-    ...effectScatterSeries[i],
-    data: [
-      {
-        ...message,
-        visualMap: false,
-      },
-    ],
-  };
-  i += 1;
-  if (i > 2) {
-    i = 0;
-  }
+// 异常类型到颜色的映射
+const TYPE_COLORS = {
+  域名篡改: '#f5222d', // 鲜艳的红色
+  恶意攻击: '#faad14', // 明亮的橙色
+  数据泄露: '#52c41a', // 鲜艳的绿色
+  未知异常: '#1890ff', // 亮蓝色
+  DNS劫持: '#722ed1', // 紫色
+  钓鱼网站: '#eb2f96', // 粉红色
+};
+
+// 创建圆环SVG路径
+const RING_PATH = 'path://M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM2 8a6 6 0 1 0 12 0A6 6 0 0 0 2 8z';
+
+export function genOverviewMap() {
+  // 处理异常数据
+  const processedData = mockData.reduce((acc, item) => {
+    const locations = item.地理位置 || [];
+    locations.forEach(loc => {
+      const color = TYPE_COLORS[item.异常类型] || TYPE_COLORS['未知异常'];
+      acc.push({
+        name: item.域名,
+        type: item.异常类型,
+        time: item.时间,
+        ip: loc.ip,
+        value: [parseFloat(loc.wgsLon), parseFloat(loc.wgsLat), 1],
+        symbol: RING_PATH,
+        symbolSize: [16, 16], // 明确指定宽高
+        itemStyle: {
+          color,
+          shadowBlur: 4,
+          shadowColor: color,
+          opacity: 0.9,
+        },
+      });
+    });
+    return acc;
+  }, []);
+
   return {
-    visualMap: {
-      type: 'continuous',
-      min: Number(min),
-      max: Number(max),
-      left: 'center',
-      bottom: '30',
-      orient: 'horizontal',
-      itemWidth: 15,
-      itemHeight: 200,
-      text: [max, min],
-      inRange: {
-        color: ['#345f7b', '#081523'], // 蓝绿
-      },
-      textStyle: {
-        color: '#999',
+    tooltip: {
+      show: true,
+      formatter: params => {
+        const { data } = params;
+        return `<div style="font-size:14px;color:#333;margin-bottom:4px;">
+                  <b>${data.name}</b>
+                </div>
+                <div style="font-size:12px;color:#666;">
+                  异常类型：<span style="color:${data.itemStyle.color};font-weight:bold;">${data.type}</span><br/>
+                  时间：${data.time}<br/>
+                  IP：${data.ip}
+                </div>`;
       },
     },
     series: [
-      ...effectScatterSeries,
-      // {
-      //   name: '贷款金额',
-      //   type: "bar3D",
-      //   coordinateSystem: 'geo3D',
-      //   barSize: 0.8, //柱子粗细
-      //   shading: 'lambert',
-      //   opacity: 1,
-      //   bevelSize: 0.3,
-      //   itemStyle: {
-      //     color: '#23ffb5',
-      //     opacity: 0.6
-      //   },
-      //   label: {
-      //     show: false,
-      //     formatter: '{b}'
-      //   },
-      //   data: convertData(cmap),
-      // },
       {
-        name: '贷款金额',
-        type: 'map',
-        mapType: 'china',
-        roam: false,
-        label: {
-          normal: {
-            formatter: '{b}',
-            position: 'right',
-            show: false,
-            textStyle: {
-              color: '#fff',
-            },
-          },
-          emphasis: {
-            show: false,
+        type: 'scatter',
+        coordinateSystem: 'geo',
+        symbol: RING_PATH,
+        symbolSize: [16, 16],
+        data: processedData,
+        emphasis: {
+          scale: true,
+          scaleSize: 1.2, // 放大比例
+          itemStyle: {
+            opacity: 1,
+            shadowBlur: 10,
+            shadowColor: params => params.data.itemStyle.color,
           },
         },
-        itemStyle: {
-          normal: {
-            // color: '#fff',
-            // areaColor: '#023677',
-            borderColor: '#0692a4',
-          },
-          emphasis: {
-            areaColor: '#4499d0',
-          },
-        },
-        data: cmap.map(t => ({ name: t.name, value: t.value })),
       },
     ],
   };
@@ -192,7 +175,7 @@ export function genOverviewBar(cmap) {
   };
 }
 
-function effectScatter() {
+export function effectScatter() {
   const effectScatterArr = [
     {
       labelBackgroundColor: 'rgba(254,174,33,.8)',
@@ -210,7 +193,7 @@ function effectScatter() {
 
   return effectScatterArr.map((item, index) => {
     return {
-      name: '贷款金额',
+      name: '业务量',
       type: 'effectScatter',
       coordinateSystem: 'geo',
       z: 10 + index,
@@ -220,7 +203,7 @@ function effectScatter() {
         normal: {
           show: true,
           formatter(params) {
-            return `{fline|客户：${params.data.username}  ${params.data.telphone}}\n{tline|在 ${params.data.address} 发起贷款${params.data.money}万元}`;
+            return `{fline|客户：${params.data.username}  ${params.data.telphone}}\n{tline|在 ${params.data.address} 发起业务 ${params.data.money}万元}`;
           },
           position: 'top',
           backgroundColor: item.labelBackgroundColor,
