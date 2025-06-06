@@ -37,8 +37,8 @@ module.exports = merge(commonConfig, {
       skipWaiting: true,
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].[hash].css',
-      chunkFilename: '[id].[hash].css',
+      filename: 'css/[name].[hash].css',
+      chunkFilename: 'css/[id].[hash].css',
     }),
     /*
     new BundleAnalyzerPlugin({
