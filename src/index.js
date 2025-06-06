@@ -56,7 +56,7 @@ function render(Component) {
     <AppContainer>
       <Provider store={store}>
         <ConfigProvider locale={zhCN}>
-          <BrowserRouter>
+          <BrowserRouter basename="/dashboard">
             <Component />
           </BrowserRouter>
         </ConfigProvider>

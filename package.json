@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development NODE_OPTIONS=--openssl-legacy-provider webpack-dev-server --config ./build/webpack.dev.conf.js",
     "start": "cross-env NODE_ENV=development NODE_OPTIONS=--openssl-legacy-provider node ./build/dev-server.js",
-    "build": "cross-env NODE_ENV=production webpack --config ./build/webpack.prod.conf.js",
+    "build": "cross-env NODE_ENV=production NODE_OPTIONS=\"--openssl-legacy-provider --max_old_space_size=768\" webpack --config ./build/webpack.prod.conf.js",
     "analyz": "cross-env NODE_ENV=production npm_config_report=true npm run build",
     "lint-staged": "lint-staged",
     "lint-staged:js": "eslint --ext .js --fix",

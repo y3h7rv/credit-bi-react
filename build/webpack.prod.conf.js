@@ -10,7 +10,7 @@ module.exports = merge(commonConfig, {
   mode: 'production',
   devtool: 'cheap-module-source-map',
   output: {
-    publicPath: '/', // 打包路径
+    publicPath: '/dashboard/', // 打包路径
     // 输出目录
     path: path.resolve(__dirname, '../dist'),
     // 文件名称
@@ -40,6 +40,7 @@ module.exports = merge(commonConfig, {
       filename: '[name].[hash].css',
       chunkFilename: '[id].[hash].css',
     }),
+    /*
     new BundleAnalyzerPlugin({
       analyzerMode: 'server',
       analyzerHost: '127.0.0.1',
@@ -52,6 +53,7 @@ module.exports = merge(commonConfig, {
       statsOptions: null,
       logLevel: 'info',
     }),
+    */
     // new webpack.DefinePlugin({
     //   'process.env.NODE_ENV': JSON.stringify('production'),
     // }),

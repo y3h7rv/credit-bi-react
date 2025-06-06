@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Input, Button, Table, Card, message } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import dnsService from '@/services/dns';
-import styles from './index.scss';
+import styles from './index.module.scss';
 
 const PassiveDNS = () => {
   const [domain, setDomain] = useState('');
