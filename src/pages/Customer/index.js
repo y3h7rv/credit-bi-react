@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from 'antd';
+import Card from '@/components/Card';
 import Bar from '@/components/Charts/Bar';
 
 const riskData = [

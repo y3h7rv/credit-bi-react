@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { Card } from 'antd';
+import Card from '@/components/Card';
 import Pie from '@/components/Charts/Pie';
 import { genEquipment } from '@/utils/genChartData';
 
