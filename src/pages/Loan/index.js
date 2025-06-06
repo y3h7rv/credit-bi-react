@@ -9,11 +9,11 @@ export default class index extends PureComponent {
   render() {
     return (
       <div className={styles.topRight}>
+        <PassiveDNS />
         <Card
           title="授权依赖统计数据"
           style={{
-            height: '320px',
-            marginBottom: '15px',
+            height: '260px',
             background: 'rgba(40, 47, 56, 0.5)',
           }}
         >
@@ -64,6 +64,7 @@ export default class index extends PureComponent {
             </li>
           </ul>
         </Card>
+
         <Card
           title="关键依赖域名案例"
           style={{
@@ -73,7 +74,6 @@ export default class index extends PureComponent {
         >
           <DomainCarousel />
         </Card>
-        <PassiveDNS />
       </div>
     );
   }
