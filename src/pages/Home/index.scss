@@ -15,13 +15,19 @@
   overflow: hidden;
   .topLeft,
   .topCenter,
-  .topRight,
   .bottomLeft,
   .bottomCenter,
   .bottomRight {
     position: relative;
     background: rgba(40, 47, 56, 0.5);
     overflow: auto;
+  }
+
+  /* 特殊处理topRight，因为它包含弹窗组件 */
+  .topRight {
+    position: relative;
+    background: rgba(40, 47, 56, 0.5);
+    overflow: visible; /* 允许弹窗显示 */
 
     &::-webkit-scrollbar {
       width: 6px;

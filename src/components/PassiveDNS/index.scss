@@ -1,164 +1,199 @@
-.container {
-  margin-bottom: 0;
-  background: rgba(40, 47, 56, 0.9);
-  border-radius: 4px;
-  padding: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+.passive-dns-pagination {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin: 16px 0 !important;
+  padding: 16px 24px !important;
+  background: rgba(255, 255, 255, 0.02) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+  width: 100% !important;
+
+  /* 强制所有分页元素横向排列 */
+  &.ant-pagination,
+  ul.ant-pagination,
+  .ant-pagination {
+    display: inline-flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    white-space: nowrap !important;
+    width: auto !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .ant-pagination-item,
+  .ant-pagination-prev,
+  .ant-pagination-next {
+    display: inline-block !important;
+    vertical-align: middle !important;
+    margin: 0 4px !important;
+    float: none !important;
+    position: relative !important;
+  }
+
+  .ant-pagination-item-container {
+    display: inline-flex !important;
+    flex-direction: row !important;
+  }
+
+  .ant-pagination-total-text {
+    display: inline-block !important;
+    margin-right: 16px !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+    vertical-align: middle !important;
+  }
+
+  .ant-pagination-options {
+    display: inline-block !important;
+    margin-left: 16px !important;
+    vertical-align: middle !important;
+  }
+
+  /* 确保所有子元素都不换行 */
+  * {
+    white-space: nowrap !important;
+  }
 }
 
-.searchBar {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 8px;
+/* 表格样式优化 */
+.passive-dns-wrapper {
+  .ant-table {
+    background: transparent !important;
+    color: #fff !important;
 
-  :global {
-    .ant-input {
-      background: rgba(255, 255, 255, 0.9);
-      border-color: rgba(255, 255, 255, 0.2);
-      color: rgba(0, 0, 0, 0.85);
-      height: 32px;
-
-      &::placeholder {
-        color: rgba(0, 0, 0, 0.45);
-      }
-
-      &:hover,
-      &:focus {
-        border-color: #1890ff;
-      }
+    .ant-table-thead > tr > th {
+      background: rgba(24, 144, 255, 0.1) !important;
+      color: #40a9ff !important;
+      border-bottom: 1px solid rgba(24, 144, 255, 0.3) !important;
+      font-weight: 600 !important;
+      font-size: 14px !important;
+      text-align: center !important;
+      padding: 12px 8px !important;
     }
 
-    .ant-picker {
-      background: rgba(255, 255, 255, 0.9);
-      height: 32px;
-      border-color: rgba(255, 255, 255, 0.2);
-
-      input {
-        color: rgba(0, 0, 0, 0.85);
-        height: 30px;
-      }
-
-      .ant-picker-suffix {
-        color: rgba(0, 0, 0, 0.45);
-      }
-
-      &:hover {
-        border-color: #1890ff;
-      }
+    .ant-table-tbody > tr > td {
+      background: transparent !important;
+      color: rgba(255, 255, 255, 0.9) !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+      padding: 10px 8px !important;
+      font-size: 13px !important;
     }
 
-    .ant-btn {
-      height: 32px;
-      padding: 4px 15px;
+    .ant-table-tbody > tr:hover > td {
+      background: rgba(24, 144, 255, 0.08) !important;
+      color: #fff !important;
+    }
 
-      &.ant-btn-primary {
-        background: #1890ff;
-        border-color: #1890ff;
+    .ant-table-tbody > tr:nth-child(even) > td {
+      background: rgba(255, 255, 255, 0.02) !important;
+    }
 
-        &:hover {
-          background: #40a9ff;
-          border-color: #40a9ff;
-        }
-      }
+    .ant-table-tbody > tr:nth-child(even):hover > td {
+      background: rgba(24, 144, 255, 0.1) !important;
+    }
+
+    .ant-table-container {
+      border-radius: 8px !important;
+      overflow: hidden !important;
+    }
+
+    .ant-table-content {
+      background: transparent !important;
+    }
+
+    .ant-empty {
+      color: rgba(255, 255, 255, 0.6) !important;
+    }
+
+    .ant-empty-description {
+      color: rgba(255, 255, 255, 0.6) !important;
     }
   }
 }
 
-.resultsCard {
-  margin-top: 12px;
-  background: rgba(40, 47, 56, 0.9);
-  border-radius: 4px;
+/* 分页容器样式 */
+.ant-pagination.ant-table-pagination {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
 
-  :global {
-    .ant-card-head {
-      min-height: 40px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  /* 页码列表容器 */
+  .ant-pagination-item-container {
+    display: flex !important;
+    flex-direction: row !important;
+  }
 
-      .ant-card-head-title {
-        padding: 8px 0;
-        color: #fff;
+  /* 所有页码按钮的通用样式 */
+  .ant-pagination-prev,
+  .ant-pagination-next,
+  .ant-pagination-item {
+    float: left !important;
+    display: inline-block !important;
+    margin: 0 4px !important;
+  }
+
+  /* 页码数字列表 */
+  .ant-pagination-item {
+    display: inline-block !important;
+    vertical-align: middle !important;
+  }
+
+  /* 总数文本 */
+  .ant-pagination-total-text {
+    float: left !important;
+    margin-right: 12px !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+  }
+
+  /* 强制内联布局 */
+  ul.ant-pagination {
+    display: inline-flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    white-space: nowrap !important;
+  }
+}
+
+/* 禁用任何可能的垂直布局 */
+.ant-pagination-options-quick-jumper,
+.ant-pagination-options,
+.ant-pagination-simple {
+  display: inline-block !important;
+  vertical-align: middle !important;
+  float: left !important;
+}
+
+/* 日期选择器输入框样式 */
+.passive-dns-datepicker-input {
+  .ant-picker-input {
+    background: transparent !important;
+
+    input {
+      background: transparent !important;
+      color: rgba(0, 0, 0, 0.85) !important;
+
+      &::placeholder {
+        color: rgba(0, 0, 0, 0.45) !important;
       }
     }
+  }
 
-    .ant-table {
-      background: transparent;
-      color: #fff;
+  &.ant-picker {
+    background: rgba(255, 255, 255, 0.95) !important;
 
-      .ant-table-thead > tr > th {
-        background: rgba(255, 255, 255, 0.1);
-        color: #fff;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 8px;
-      }
-
-      .ant-table-tbody > tr > td {
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 8px;
-      }
-
-      .ant-table-tbody > tr:hover > td {
-        background: rgba(255, 255, 255, 0.1);
-      }
-
-      .ant-table-placeholder {
-        background: transparent;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-
-        .ant-empty-description {
-          color: rgba(255, 255, 255, 0.5);
-        }
-      }
+    &:hover,
+    &:focus {
+      background: rgba(255, 255, 255, 1) !important;
+      border-color: #40a9ff !important;
     }
 
-    .ant-pagination {
-      padding: 12px;
-      color: #fff;
-
-      .ant-pagination-item {
-        background: transparent;
-        border-color: rgba(255, 255, 255, 0.2);
-        min-width: 28px;
-        height: 28px;
-        line-height: 26px;
-
-        a {
-          color: #fff;
-        }
-
-        &-active {
-          border-color: #1890ff;
-
-          a {
-            color: #1890ff;
-          }
-        }
-      }
-
-      .ant-pagination-prev,
-      .ant-pagination-next {
-        button {
-          background: transparent;
-          color: #fff;
-        }
-      }
-
-      .ant-select {
-        color: #fff;
-        .ant-select-selector {
-          background: transparent;
-          border-color: rgba(255, 255, 255, 0.2);
-          height: 28px;
-
-          .ant-select-selection-item {
-            line-height: 26px;
-          }
-        }
-
-        .ant-select-arrow {
-          color: rgba(255, 255, 255, 0.7);
-        }
-      }
+    &.ant-picker-focused {
+      background: rgba(255, 255, 255, 1) !important;
+      border-color: #40a9ff !important;
+      box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2) !important;
     }
   }
 }

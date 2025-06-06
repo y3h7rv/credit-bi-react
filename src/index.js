@@ -9,6 +9,7 @@ import zhCN from 'antd/lib/locale/zh_CN';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 import 'antd/dist/antd.css';
+import './styles/antd-datepicker-fix.css';
 import { socket } from './utils/socket';
 import { SAVE_LOAN, SAVE_MAP } from './store/types';
 import Router from './router';

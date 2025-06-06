@@ -10,7 +10,7 @@ app.use(cors());
 // DNS查询接口
 app.get('/api/dns/:domain', async (req, res) => {
   const { domain } = req.params;
-  const { limit = 100, mode = 7, rtype = 1, lastKey } = req.query;
+  const { limit = 100, mode = 7, rtype = -1, lastKey, start, end } = req.query;
 
   // 构建API URL和查询参数
   const API_URL = `https://fdp.qianxin.com/v3/flint/rrset/${domain}/`;
@@ -23,6 +23,54 @@ app.get('/api/dns/:domain', async (req, res) => {
   // 如果有lastKey，添加到查询参数中
   if (lastKey) {
     queryParams.lastkey = lastKey;
+  }
+
+  // 验证时间格式是否正确（yyyymmddhhmmss）
+  const isValidTimeFormat = timeStr => {
+    if (!timeStr) return false;
+    const regex = /^\d{14}$/; // 必须是14位数字
+    if (!regex.test(timeStr)) return false;
+
+    const year = parseInt(timeStr.substring(0, 4), 10);
+    const month = parseInt(timeStr.substring(4, 6), 10) - 1; // 月份从0开始
+    const day = parseInt(timeStr.substring(6, 8), 10);
+    const hour = parseInt(timeStr.substring(8, 10), 10);
+    const minute = parseInt(timeStr.substring(10, 12), 10);
+    const second = parseInt(timeStr.substring(12, 14), 10);
+
+    const date = new Date(year, month, day, hour, minute, second);
+    return (
+      date.getFullYear() === year &&
+      date.getMonth() === month &&
+      date.getDate() === day &&
+      date.getHours() === hour &&
+      date.getMinutes() === minute &&
+      date.getSeconds() === second
+    );
+  };
+
+  // 如果有时间范围参数，验证并添加到查询参数中
+  if (start) {
+    if (!isValidTimeFormat(start)) {
+      return res.status(500).json({
+        status: 'error',
+        code: 500,
+        message: 'invalid start time',
+      });
+    }
+    queryParams.start = start;
+    console.log('开始时间:', start);
+  }
+  if (end) {
+    if (!isValidTimeFormat(end)) {
+      return res.status(500).json({
+        status: 'error',
+        code: 500,
+        message: 'invalid end time',
+      });
+    }
+    queryParams.end = end;
+    console.log('结束时间:', end);
   }
 
   try {

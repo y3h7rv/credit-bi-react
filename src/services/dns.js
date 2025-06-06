@@ -1,19 +1,30 @@
 import axios from 'axios';
 
-const API_BASE_URL = '';
+const API_BASE_URL = 'http://localhost:3000';
 
 const dnsService = {
-  async queryPassiveDNS(domain) {
+  async queryPassiveDNS(params) {
+    const { domain, start, end } = params;
     console.log('开始查询域名:', domain);
+    console.log('查询参数:', params);
+
     try {
       const url = `${API_BASE_URL}/api/dns/${domain}`;
       const config = {
         params: {
           limit: 1000,
-          mode: 3,
-          rtype: 1,
+          mode: 7,
+          rtype: -1,
         },
       };
+
+      // 如果提供了时间范围，添加到请求参数中
+      if (start) {
+        config.params.start = start;
+      }
+      if (end) {
+        config.params.end = end;
+      }
 
       console.log('请求URL:', url);
       console.log('请求参数:', config);

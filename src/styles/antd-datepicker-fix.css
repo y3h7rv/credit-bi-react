@@ -1,0 +1,376 @@
+/*
+  Antd DatePicker 样式修复 (v4)
+  - 简化的单个DatePicker样式
+  - 避免RangePicker的复杂问题
+*/
+
+/* 基础弹窗样式 - 使用自定义类名 */
+:global(.passive-dns-datepicker) {
+  background: rgba(40, 47, 56, 0.98) !important;
+  backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
+  z-index: 1050 !important;
+  position: fixed !important; /* 确保弹窗不受父容器限制 */
+  max-height: 80vh !important; /* 限制最大高度 */
+  overflow: visible !important; /* 确保内容可见 */
+}
+
+/* 通用弹窗样式保底 - 提高优先级 */
+:global(.ant-picker-dropdown) {
+  z-index: 1050 !important;
+  position: fixed !important;
+  overflow: visible !important;
+}
+
+/* 修复可能的容器overflow问题 */
+:global(.passive-dns-wrapper) {
+  position: relative !important;
+  overflow: visible !important;
+}
+
+/* 确保弹窗在所有情况下都能正确显示 */
+:global(body .ant-picker-dropdown.passive-dns-datepicker) {
+  z-index: 1050 !important;
+  position: fixed !important;
+}
+
+/* 在 .passive-dns-wrapper 内的弹窗样式 */
+:global(.passive-dns-wrapper .ant-picker-dropdown),
+:global(.passive-dns-datepicker) {
+  background: rgba(40, 47, 56, 0.98) !important;
+  backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
+}
+
+:global(.passive-dns-wrapper .ant-picker-panel-container),
+:global(.passive-dns-datepicker .ant-picker-panel-container) {
+  background: transparent !important;
+}
+
+:global(.passive-dns-wrapper .ant-picker-panel),
+:global(.passive-dns-datepicker .ant-picker-panel) {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* 头部 */
+:global(.passive-dns-wrapper .ant-picker-header),
+:global(.passive-dns-datepicker .ant-picker-header) {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #fff !important;
+}
+
+:global(.passive-dns-wrapper .ant-picker-header *),
+:global(.passive-dns-datepicker .ant-picker-header *) {
+  color: #fff !important;
+}
+
+:global(.passive-dns-wrapper .ant-picker-header button),
+:global(.passive-dns-datepicker .ant-picker-header button) {
+  color: rgba(255, 255, 255, 0.8) !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+:global(.passive-dns-wrapper .ant-picker-header button:hover),
+:global(.passive-dns-datepicker .ant-picker-header button:hover) {
+  color: #40a9ff !important;
+  background: rgba(64, 169, 255, 0.1) !important;
+}
+
+:global(.passive-dns-wrapper .ant-picker-header-view),
+:global(.passive-dns-datepicker .ant-picker-header-view) {
+  color: #fff !important;
+}
+
+/* 内容 */
+:global(.passive-dns-wrapper .ant-picker-content),
+:global(.passive-dns-datepicker .ant-picker-content) {
+  background: transparent !important;
+}
+
+:global(.passive-dns-wrapper .ant-picker-content th),
+:global(.passive-dns-datepicker .ant-picker-content th) {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+:global(.passive-dns-wrapper .ant-picker-cell),
+:global(.passive-dns-datepicker .ant-picker-cell) {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+:global(.passive-dns-wrapper .ant-picker-cell-inner),
+:global(.passive-dns-datepicker .ant-picker-cell-inner) {
+  color: rgba(255, 255, 255, 0.9) !important;
+  background: transparent !important;
+  border-radius: 4px !important;
+}
+
+:global(.passive-dns-wrapper .ant-picker-cell:hover .ant-picker-cell-inner),
+:global(.passive-dns-datepicker .ant-picker-cell:hover .ant-picker-cell-inner) {
+  background: rgba(64, 169, 255, 0.3) !important;
+  color: #fff !important;
+}
+
+:global(.passive-dns-wrapper .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner),
+:global(.passive-dns-wrapper .ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner),
+:global(.passive-dns-wrapper .ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner),
+:global(.passive-dns-datepicker .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner),
+:global(.passive-dns-datepicker .ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner),
+:global(.passive-dns-datepicker .ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner) {
+  background: #1890ff !important;
+  color: #fff !important;
+}
+
+:global(.passive-dns-wrapper .ant-picker-cell-in-view.ant-picker-cell-in-range .ant-picker-cell-inner),
+:global(.passive-dns-datepicker .ant-picker-cell-in-view.ant-picker-cell-in-range .ant-picker-cell-inner) {
+  background: rgba(24, 144, 255, 0.2) !important;
+}
+
+:global(.passive-dns-wrapper .ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before),
+:global(.passive-dns-datepicker .ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before) {
+  border: 1px solid #1890ff !important;
+}
+
+:global(.passive-dns-wrapper .ant-picker-cell-disabled .ant-picker-cell-inner),
+:global(.passive-dns-datepicker .ant-picker-cell-disabled .ant-picker-cell-inner) {
+  color: rgba(255, 255, 255, 0.3) !important;
+  background: transparent !important;
+}
+
+/* 时间选择面板 - 修复平铺问题 */
+:global(.passive-dns-wrapper .ant-picker-time-panel),
+:global(.passive-dns-datepicker .ant-picker-time-panel) {
+  background: rgba(40, 47, 56, 0.98) !important;
+  border-left: 1px solid rgba(255, 255, 255, 0.1) !important;
+  width: 168px !important; /* 固定宽度，防止过宽 */
+  max-height: 224px !important; /* 限制高度，强制滚动 */
+  overflow: hidden !important;
+}
+
+:global(.passive-dns-wrapper .ant-picker-time-panel-column),
+:global(.passive-dns-datepicker .ant-picker-time-panel-column) {
+  border-left: 1px solid rgba(255, 255, 255, 0.1) !important;
+  width: 56px !important; /* 固定每列宽度 */
+  height: 224px !important; /* 固定高度 */
+  overflow-y: auto !important; /* 强制垂直滚动 */
+  overflow-x: hidden !important;
+}
+
+:global(.passive-dns-wrapper .ant-picker-time-panel-column:first-child),
+:global(.passive-dns-datepicker .ant-picker-time-panel-column:first-child) {
+  border-left: none !important;
+}
+
+/* 时间选择器滚动条样式 */
+:global(.passive-dns-wrapper .ant-picker-time-panel-column::-webkit-scrollbar),
+:global(.passive-dns-datepicker .ant-picker-time-panel-column::-webkit-scrollbar) {
+  width: 4px !important;
+}
+
+:global(.passive-dns-wrapper .ant-picker-time-panel-column::-webkit-scrollbar-thumb),
+:global(.passive-dns-datepicker .ant-picker-time-panel-column::-webkit-scrollbar-thumb) {
+  background: rgba(255, 255, 255, 0.3) !important;
+  border-radius: 2px !important;
+}
+
+:global(.passive-dns-wrapper .ant-picker-time-panel-column::-webkit-scrollbar-track),
+:global(.passive-dns-datepicker .ant-picker-time-panel-column::-webkit-scrollbar-track) {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+:global(.passive-dns-wrapper .ant-picker-time-panel-cell),
+:global(.passive-dns-datepicker .ant-picker-time-panel-cell) {
+  height: 28px !important; /* 固定单元格高度 */
+  line-height: 28px !important;
+  padding: 0 !important;
+}
+
+:global(.passive-dns-wrapper .ant-picker-time-panel-cell-inner),
+:global(.passive-dns-datepicker .ant-picker-time-panel-cell-inner) {
+  color: rgba(255, 255, 255, 0.9) !important;
+  height: 28px !important;
+  line-height: 28px !important;
+  display: block !important;
+  text-align: center !important;
+  cursor: pointer !important;
+}
+
+:global(.passive-dns-wrapper .ant-picker-time-panel-cell-inner:hover),
+:global(.passive-dns-datepicker .ant-picker-time-panel-cell-inner:hover) {
+  background: rgba(64, 169, 255, 0.2) !important;
+}
+
+:global(.passive-dns-wrapper .ant-picker-time-panel-cell-selected .ant-picker-time-panel-cell-inner),
+:global(.passive-dns-datepicker .ant-picker-time-panel-cell-selected .ant-picker-time-panel-cell-inner) {
+  background: #1890ff !important;
+  color: #fff !important;
+}
+
+/* 底部 */
+:global(.passive-dns-wrapper .ant-picker-footer),
+:global(.passive-dns-datepicker .ant-picker-footer) {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 预设范围区域样式 */
+:global(.passive-dns-wrapper .ant-picker-ranges),
+:global(.passive-dns-datepicker .ant-picker-ranges) {
+  padding: 8px 12px !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: rgba(255, 255, 255, 0.02) !important;
+}
+
+:global(.passive-dns-wrapper .ant-picker-preset > .ant-tag),
+:global(.passive-dns-datepicker .ant-picker-preset > .ant-tag) {
+  color: rgba(255, 255, 255, 0.9) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  margin: 2px 4px !important;
+  cursor: pointer !important;
+}
+
+:global(.passive-dns-wrapper .ant-picker-preset > .ant-tag:hover),
+:global(.passive-dns-datepicker .ant-picker-preset > .ant-tag:hover) {
+  color: #1890ff !important;
+  background: rgba(24, 144, 255, 0.15) !important;
+  border-color: #1890ff !important;
+}
+
+/* 确认按钮样式 */
+:global(.passive-dns-wrapper .ant-picker-ok .ant-btn),
+:global(.passive-dns-datepicker .ant-picker-ok .ant-btn) {
+  background: linear-gradient(135deg, #1890ff, #096dd9) !important;
+  border-color: #1890ff !important;
+  color: #fff !important;
+  font-weight: 500 !important;
+  box-shadow: 0 2px 8px rgba(24, 144, 255, 0.3) !important;
+}
+
+:global(.passive-dns-wrapper .ant-picker-ok .ant-btn:hover),
+:global(.passive-dns-datepicker .ant-picker-ok .ant-btn:hover) {
+  background: linear-gradient(135deg, #40a9ff, #1890ff) !important;
+  border-color: #40a9ff !important;
+  box-shadow: 0 4px 12px rgba(64, 169, 255, 0.4) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* 现在按钮样式 */
+:global(.passive-dns-wrapper .ant-picker-now-btn),
+:global(.passive-dns-datepicker .ant-picker-now-btn) {
+  color: #1890ff !important;
+  border: 1px solid rgba(24, 144, 255, 0.3) !important;
+  background: rgba(24, 144, 255, 0.05) !important;
+}
+
+:global(.passive-dns-wrapper .ant-picker-now-btn:hover),
+:global(.passive-dns-datepicker .ant-picker-now-btn:hover) {
+  color: #40a9ff !important;
+  border-color: #40a9ff !important;
+  background: rgba(64, 169, 255, 0.1) !important;
+}
+
+/* 确保输入框样式正常 */
+:global(.passive-dns-wrapper .ant-picker) {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  color: rgba(0, 0, 0, 0.85) !important;
+}
+
+:global(.passive-dns-wrapper .ant-picker:hover),
+:global(.passive-dns-wrapper .ant-picker:focus),
+:global(.passive-dns-wrapper .ant-picker.ant-picker-focused) {
+  border-color: #40a9ff !important;
+  box-shadow: 0 0 0 2px rgba(64, 169, 255, 0.2) !important;
+}
+
+:global(.passive-dns-wrapper .ant-picker-input > input) {
+  color: rgba(0, 0, 0, 0.85) !important;
+}
+
+:global(.passive-dns-wrapper .ant-picker-suffix) {
+  color: rgba(0, 0, 0, 0.45) !important;
+}
+
+:global(.passive-dns-wrapper .ant-picker-clear) {
+  color: rgba(0, 0, 0, 0.45) !important;
+}
+
+:global(.passive-dns-wrapper .ant-picker-clear:hover) {
+  color: rgba(0, 0, 0, 0.85) !important;
+}
+
+/* 额外的修复：确保弹窗在所有布局情况下都能正确显示 */
+:global(.homeBox) {
+  overflow: visible !important; /* 临时覆盖主容器的overflow设置 */
+}
+
+/* 确保topRight区域不会裁剪弹窗 */
+:global(.homeBox .topRight) {
+  overflow: visible !important;
+  z-index: 1000 !important;
+}
+
+/* 为被动DNS组件添加特殊的z-index */
+:global(.passive-dns-wrapper) {
+  z-index: 1001 !important;
+  position: relative !important;
+}
+
+/* 确保日期选择器弹窗始终在最顶层 */
+:global(.ant-picker-dropdown.passive-dns-datepicker),
+:global(body > .ant-picker-dropdown.passive-dns-datepicker) {
+  z-index: 1060 !important;
+  position: fixed !important;
+  transform: none !important; /* 防止transform影响定位 */
+}
+
+/* Antd v4 特殊修复 */
+:global(body .ant-picker-dropdown) {
+  z-index: 1060 !important;
+}
+
+/* 修复可能的定位问题 */
+:global(.ant-picker-dropdown-placement-bottomLeft),
+:global(.ant-picker-dropdown-placement-bottomRight),
+:global(.ant-picker-dropdown-placement-topLeft),
+:global(.ant-picker-dropdown-placement-topRight) {
+  z-index: 1060 !important;
+  position: fixed !important;
+}
+
+/* 确保弹窗内容可见 */
+:global(.passive-dns-datepicker .ant-picker-dropdown-range) {
+  background: rgba(40, 47, 56, 0.98) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* 修复重复弹窗问题 - 确保只有一个弹窗实例 */
+:global(.ant-picker-dropdown.ant-picker-dropdown-hidden) {
+  display: none !important;
+}
+
+/* 移除了复杂的弹窗冲突处理，因为现在使用简单的DatePicker */
+
+/* 简化的时间面板布局 - 适用于单个DatePicker */
+:global(.passive-dns-datepicker .ant-picker-datetime-panel) {
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+:global(.passive-dns-datepicker .ant-picker-date-panel) {
+  border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+:global(.passive-dns-datepicker .ant-picker-time-panel) {
+  min-width: 168px !important;
+  max-width: 168px !important;
+}
