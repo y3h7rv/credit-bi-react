@@ -160,7 +160,7 @@ export default class index extends PureComponent {
             height: 'auto',
             background: 'rgba(40, 47, 56, 0.5)',
             border: '1px solid rgba(83, 179, 228, 0.3)',
-            marginBottom: '15px',
+            marginBottom: '8px',
           }}
         >
           <table className={styles.tableBox}>

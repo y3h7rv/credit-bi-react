@@ -13,7 +13,7 @@ export default class index extends PureComponent {
         <Card
           title="授权依赖统计数据"
           style={{
-            height: '260px',
+            height: '120px',
             background: 'rgba(40, 47, 56, 0.5)',
           }}
         >
@@ -68,7 +68,7 @@ export default class index extends PureComponent {
         <Card
           title="关键依赖域名案例"
           style={{
-            height: '320px',
+            height: '140px',
             background: 'rgba(40, 47, 56, 0.5)',
           }}
         >

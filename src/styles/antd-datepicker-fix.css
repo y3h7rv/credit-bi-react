@@ -315,6 +315,23 @@
 :global(.homeBox .topRight) {
   overflow: visible !important;
   z-index: 1000 !important;
+  align-items: flex-start !important; /* 防止网格拉伸 */
+}
+
+/* 强制限制卡片高度，避免网格系统的最小高度影响 */
+:global(.homeBox .topRight .ant-card) {
+  flex: 0 0 auto !important;
+  max-height: none !important;
+}
+
+:global(.homeBox .topRight .ant-card:nth-child(2)) {
+  max-height: 120px !important;
+  height: 120px !important;
+}
+
+:global(.homeBox .topRight .ant-card:nth-child(3)) {
+  max-height: 140px !important;
+  height: 140px !important;
 }
 
 /* 为被动DNS组件添加特殊的z-index */

@@ -4,7 +4,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   overflow: visible; /* 确保弹窗组件可以正常显示 */
 
   :global {
@@ -12,19 +12,45 @@
       height: auto;
       margin-bottom: 0;
       background: rgba(40, 47, 56, 0.5);
+      flex-shrink: 0; /* 防止卡片被压缩 */
+      max-height: none; /* 移除最大高度限制 */
 
       .ant-card-head {
-        min-height: 40px;
-        padding: 0 16px;
+        min-height: 32px; /* 进一步减小头部高度 */
+        padding: 0 8px;
 
         .ant-card-head-title {
-          padding: 8px 0;
+          padding: 4px 0;
           color: #fff;
+          font-size: 13px;
+          line-height: 1.2;
         }
       }
 
       .ant-card-body {
-        padding: 12px;
+        padding: 6px;
+        min-height: 0; /* 移除最小高度限制 */
+        overflow: hidden; /* 防止内容溢出 */
+      }
+    }
+  }
+}
+
+/* 针对CSS modules生成的类名进行特殊处理 */
+:global(.homeBox) {
+  .topRight {
+    align-items: stretch !important;
+    
+    /* 强制设置卡片的最大高度，避免网格系统的最小高度限制 */
+    :global(.ant-card) {
+      flex: 0 0 auto !important;
+      
+      &:nth-child(2) { /* 授权依赖统计数据 */
+        max-height: 120px !important;
+      }
+      
+      &:nth-child(3) { /* 关键依赖域名案例 */
+        max-height: 140px !important;
       }
     }
   }
@@ -33,32 +59,33 @@
 .row {
   display: flex;
   justify-content: space-around;
-  padding-top: 8px;
+  padding-top: 4px;
   height: auto;
   li {
     text-align: center;
   }
   .title {
-    font-size: 14px;
+    font-size: 11px;
+    line-height: 1.1;
     .percent {
-      font-size: 12px;
+      font-size: 9px;
       color: #fff;
     }
     .caretUpIcon {
       vertical-align: middle;
-      font-size: 14px;
+      font-size: 11px;
       color: #52c41a;
     }
     .caretDownIcon {
       vertical-align: middle;
-      font-size: 14px;
+      font-size: 11px;
       color: #f5222d;
     }
   }
   .content {
-    font-size: 24px;
+    font-size: 18px;
     color: #e8bb3f;
-    margin-top: 8px;
+    margin-top: 4px;
   }
 }
 
@@ -67,8 +94,8 @@
   overflow: hidden; /* 这里保持hidden，因为这是轮播组件的容器 */
   background: transparent;
   border-radius: 4px;
-  margin-top: 8px;
-  padding: 8px 8px 0;
+  margin-top: 6px;
+  padding: 6px 6px 0;
   box-sizing: border-box;
 }
 
@@ -81,21 +108,27 @@
   table-layout: fixed;
   overflow: hidden;
   background: transparent;
+  font-size: 11px;
 
   thead tr th {
     color: #53b3e4;
-    line-height: 24px;
+    line-height: 18px;
     border-top: 1px solid rgba(83, 179, 228, 0.3);
     border-bottom: 1px solid rgba(83, 179, 228, 0.3);
     font-weight: bold;
-    padding: 4px 8px;
+    padding: 3px 6px;
+    font-size: 10px;
   }
 
   tbody tr td {
     color: #fff;
-    line-height: 24px;
+    line-height: 18px;
     border-bottom: 1px solid rgba(83, 179, 228, 0.3);
-    padding: 4px 8px;
+    padding: 3px 6px;
+    font-size: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   tbody tr:hover {

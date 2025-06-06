@@ -219,6 +219,7 @@ const PassiveDNS = () => {
   // 定义样式
   const containerStyle = {
     marginBottom: 0,
+    minHeight: showResults ? 'auto' : '120px',
     background: 'linear-gradient(135deg, rgba(40, 47, 56, 0.95), rgba(30, 35, 42, 0.95))',
     borderRadius: '8px',
     padding: '20px',

@@ -21,9 +21,9 @@ export default class DomainCarousel extends PureComponent {
 
   render() {
     const { start } = this.state;
-    // 每次显示6行
+    // 每次显示5行
     const showList = [];
-    for (let i = 0; i < 6; i += 1) {
+    for (let i = 0; i < 5; i += 1) {
       showList.push(domainCases[(start + i) % domainCases.length]);
     }
     return (
