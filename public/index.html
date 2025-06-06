@@ -1,43 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Credit BI</title>
-  <!-- 添加内联样式用于调试 -->
-  <style>
-    /* 这个样式用来验证基本的样式是否生效 */
-    body {
-      background-color: #f0f2f5;
-    }
-    /* 添加一个明显的调试标记 */
-    body::before {
-      content: 'Style Loaded';
-      position: fixed;
-      top: 0;
-      left: 0;
-      background: red;
-      color: white;
-      padding: 5px;
-      z-index: 9999;
-    }
-  </style>
-  <!-- 添加调试脚本 -->
-  <script>
-    window.addEventListener('load', function() {
-      // 输出所有加载的样式表
-      const sheets = document.styleSheets;
-      console.log('Loaded stylesheets:', sheets.length);
-      for(let i = 0; i < sheets.length; i++) {
-        try {
-          console.log('Sheet', i, sheets[i].href);
-        } catch(e) {
-          console.log('Sheet', i, 'error:', e);
-        }
-      }
-    });
-  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
 </head>
 <body>
   <div id="root"></div>

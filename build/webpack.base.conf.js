@@ -37,40 +37,38 @@ module.exports = {
         },
       },
       {
-        // for global css/scss
-        test: /\.(css|scss|sass)$/,
-        exclude: /\.module\.(css|scss|sass)$/,
-        use: [
-          isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
-          {
-            loader: 'sass-loader',
-            options: {
-              implementation: require('sass'),
-            },
-          },
-        ],
-      },
-      {
-        // for css/scss modules
-        test: /\.module\.(css|scss|sass)$/,
+        test: /\.(sc|sa|c)ss$/,
         use: [
           isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
+              // import: (parsedImport) => {
+              //   // parsedImport.url - url of `@import`
+              //   // parsedImport.media - media query of `@import`
+              //   // resourcePath - path to css file
+
+              //   // Don't handle `style.css` import
+              //   console.log(parsedImport.url.includes('animate.css'))
+              //   if (parsedImport.url.includes('animate.css')) {
+              //     return false;
+              //   }
+
+              //   return true;
+              // },
               modules: {
                 localIdentName: '[local]_[hash:base64:5]',
               },
-              sourceMap: !isDev,
+              sourceMap: !isDev && true, // 开发时刷新会导致闪屏（样式加载慢一步）
             },
           },
-          'postcss-loader',
+          'postcss-loader', // 使用 postcss 为 css 加上浏览器前缀
           {
             loader: 'sass-loader',
             options: {
               implementation: require('sass'),
+              // 如果你需要 source maps for scss (通常推荐在开发模式下开启)
+              // sourceMap: isDev, // 或者直接写 true/false
             },
           },
         ],
