@@ -3,35 +3,20 @@ import animate from 'animate.css';
 import Card from '@/components/Card';
 import Line from '@/components/Charts/Line';
 import styles from './index.scss';
+import { riskTypes } from '../../../mock/riskData';
 
-const days = ['前天', '昨天', '今天'];
-const riskTypes = [
-  { name: '父子域资源记录不一致', today: 70921 },
-  { name: '悬空记录', today: 15030 },
-  { name: '僵尸记录', today: 10314 },
-  { name: '蹩脚授权', today: 77330 },
-  { name: '循环授权', today: 12657 },
-];
-
-function genHistory(today) {
-  return [
-    Math.round(today * (0.8 + Math.random() * 0.2)),
-    Math.round(today * (0.9 + Math.random() * 0.1)),
-    today,
-  ];
-}
-
+// 生成折线图数据配置 - 每个风险类型使用自己的日期和数据
 const riskLineDataArr = riskTypes.map(type => ({
   xAxis: {
     type: 'category',
-    data: days,
+    data: type.data.map(item => item.date), // 使用该风险类型自己的日期
     axisLabel: { color: '#ccc' },
     axisLine: { lineStyle: { color: '#53b3e4' } },
   },
   series: [
     {
       name: type.name,
-      data: genHistory(type.today),
+      data: type.data.map(item => item.value), // 使用对应的数值
       type: 'line',
       smooth: false,
       symbol: 'circle',
@@ -57,12 +42,13 @@ const riskLineDataArr = riskTypes.map(type => ({
   tooltip: {
     trigger: 'axis',
     formatter: params => {
-      return params
-        .map(
-          p =>
-            `<p style="text-align:left;font-size:12px;line-height:18px">${p.seriesName}：${p.value}</p>`
-        )
-        .join('');
+      const param = params[0];
+      return `
+        <div style="text-align:left;font-size:12px;line-height:18px">
+          <p style="margin:0;font-weight:bold;color:#000;">${param.name}</p>
+          <p style="margin:4px 0 0 0;">${param.seriesName}：${param.value}</p>
+        </div>
+      `;
     },
   },
   grid: {
@@ -95,11 +81,14 @@ export default class index extends PureComponent {
   }
 
   startCarousel = () => {
+    // 计算总组数：每组3个图表，向上取整
+    const totalGroups = Math.ceil(riskTypes.length / 3);
+    
     this.timer = setInterval(() => {
       this.setState(prevState => ({
-        currentGroup: (prevState.currentGroup + 1) % 2,
+        currentGroup: (prevState.currentGroup + 1) % totalGroups,
       }));
-    }, 5000); // 每5秒切换一次
+    }, 4000); // 每4秒切换一次，因为数据更多了
   };
 
   render() {
@@ -121,6 +110,16 @@ export default class index extends PureComponent {
             >
               <Line data={data} style={{ width: '100%', height: '100%' }} />
             </Card>
+          ))}
+        </div>
+        
+        {/* 添加指示器，显示当前是第几组 */}
+        <div className={styles.indicator}>
+          {Array.from({ length: Math.ceil(riskTypes.length / 3) }).map((_, idx) => (
+            <span
+              key={idx}
+              className={`${styles.dot} ${idx === currentGroup ? styles.active : ''}`}
+            />
           ))}
         </div>
       </div>

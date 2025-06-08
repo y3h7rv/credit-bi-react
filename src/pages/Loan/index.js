@@ -21,46 +21,46 @@ export default class index extends PureComponent {
             <li>
               <div className={styles.title}>
                 <span>监控域名数量</span>
-                <span className={styles.percent}>
+                {/* <span className={styles.percent}>
                   [
                   <SvgIcon icon="icon-icon-caret-up" className={styles.caretUpIcon} />
                   2.5%]
-                </span>
+                </span> */}
               </div>
-              <div className={styles.content}>1,000,000</div>
+              <div className={styles.content}>1,496,727</div>
             </li>
             <li>
               <div className={styles.title}>
                 <span>节点数量</span>
-                <span className={styles.percent}>
+                {/* <span className={styles.percent}>
                   [
                   <SvgIcon icon="icon-icon-caret-up" className={styles.caretUpIcon} />
                   1.2%]
-                </span>
+                </span> */}
               </div>
-              <div className={styles.content}>200,000</div>
+              <div className={styles.content}>1,522,722</div>
             </li>
             <li>
               <div className={styles.title}>
                 <span>授权依赖关系数量</span>
-                <span className={styles.percent}>
+                {/* <span className={styles.percent}>
                   [
                   <SvgIcon icon="icon-caret-down" className={styles.caretDownIcon} />
                   0.8%]
-                </span>
+                </span> */}
               </div>
-              <div className={styles.content}>1,562,000</div>
+              <div className={styles.content}>3,247,323</div>
             </li>
             <li>
               <div className={styles.title}>
                 <span>平均出入度</span>
-                <span className={styles.percent}>
+                {/* <span className={styles.percent}>
                   [
                   <SvgIcon icon="icon-icon-caret-up" className={styles.caretUpIcon} />
                   0.5%]
-                </span>
+                </span> */}
               </div>
-              <div className={styles.content}>123</div>
+              <div className={styles.content}>4.27</div>
             </li>
           </ul>
         </Card>
